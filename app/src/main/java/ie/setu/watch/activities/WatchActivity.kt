@@ -34,6 +34,16 @@ class WatchActivity : AppCompatActivity() {
                     .make(it,"Please Enter a title", Snackbar.LENGTH_LONG)
                     .show()
             }
+            watch.description = binding.watchDescription.text.toString()
+            if (watch.description.isNotEmpty()) {
+                i("add Button Pressed: $watch.description")
+            }
+            else {
+                Snackbar
+                    .make(it,"Please Enter a description", Snackbar.LENGTH_LONG)
+                    .show()
+            }
+
         }
         var watch1 = WatchModel("Test Object")
 
