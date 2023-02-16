@@ -12,6 +12,7 @@ class WatchActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWatchBinding
     var watch = WatchModel()
+    val watchs = ArrayList<WatchModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +35,11 @@ class WatchActivity : AppCompatActivity() {
                     .show()
             }
         }
+        var watch1 = WatchModel("Test Object")
+
+        watchs.add(watch1)
+
+        println("Successfully Added: " + watch1.toString())
     }
 }
 
