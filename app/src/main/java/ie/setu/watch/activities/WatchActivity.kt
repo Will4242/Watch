@@ -1,4 +1,4 @@
-package ie.setu.watch
+package ie.setu.watch.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
