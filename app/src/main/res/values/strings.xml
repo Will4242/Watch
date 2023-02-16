@@ -2,4 +2,5 @@
     <string name="app_name">Watch</string>
     <string name="button_addWatch">Add Watch</string>
     <string name="hint_watchTitle">Watch Title</string>
+    <string name="hint_watchDescription">Watch Description</string>
 </resources>
