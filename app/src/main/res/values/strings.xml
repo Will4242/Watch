@@ -3,4 +3,7 @@
     <string name="button_addWatch">Add Watch</string>
     <string name="hint_watchTitle">Watch Title</string>
     <string name="hint_watchDescription">Watch Description</string>
+    <string name="menu_addWatch">Add</string>
+    <string name="menu_cancelWatch">Cancel</string>
+
 </resources>
