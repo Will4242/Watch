@@ -20,8 +20,6 @@ class WatchActivity : AppCompatActivity() {
         binding = ActivityWatchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Timber.plant(Timber.DebugTree())
-
         i("Watch Activity started...")
 
         binding.btnAdd.setOnClickListener() {
