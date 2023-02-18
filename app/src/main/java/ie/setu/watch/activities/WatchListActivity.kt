@@ -29,7 +29,7 @@ class WatchListActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = WatchAdapter(app.watchs)
+        binding.recyclerView.adapter = WatchAdapter(app.watchs.findAll())
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -53,7 +53,7 @@ class WatchListActivity : AppCompatActivity() {
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
                 (binding.recyclerView.adapter)?.
-                notifyItemRangeChanged(0,app.watchs.size)
+                notifyItemRangeChanged(0,app.watchs.findAll().size)
             }
         }
 }
