@@ -34,18 +34,12 @@ class WatchActivity : AppCompatActivity() {
             watch.title = binding.watchTitle.text.toString()
             watch.description = binding.watchDescription.text.toString()
             if (watch.title.isNotEmpty()) {
-
-                app.watchs.add(watch.copy())
-                i("add Button Pressed: ${watch}")
-                for (i in app.watchs.indices) {
-                    i("Watch[$i]:${this.app.watchs[i]}")
-                }
+                app.watchs.create(watch.copy())
                 setResult(RESULT_OK)
                 finish()
             }
             else {
-                Snackbar
-                    .make(it,"Please Enter a title", Snackbar.LENGTH_LONG)
+                Snackbar.make(it,"Please Enter a Title", Snackbar.LENGTH_LONG)
                     .show()
             }
         }
