@@ -1,3 +1,8 @@
 package ie.setu.watch.models
 
-data class WatchModel(var title: String = "", var description: String = "")
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class WatchModel(var title: String = "",
+                      var description: String = "") : Parcelable
