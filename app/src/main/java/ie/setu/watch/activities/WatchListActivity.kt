@@ -10,10 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.setu.watch.R
 import ie.setu.watch.adapters.WatchAdapter
+import ie.setu.watch.adapters.WatchListener
 import ie.setu.watch.databinding.ActivityWatchListBinding
 import ie.setu.watch.main.MainApp
+import ie.setu.watch.models.WatchModel
 
-class WatchListActivity : AppCompatActivity() {
+class WatchListActivity : AppCompatActivity(), WatchListener {
+
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityWatchListBinding
@@ -29,7 +32,7 @@ class WatchListActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = WatchAdapter(app.watchs.findAll())
+        binding.recyclerView.adapter = WatchAdapter(app.watchs.findAll(),this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -48,6 +51,20 @@ class WatchListActivity : AppCompatActivity() {
     }
 
     private val getResult =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                (binding.recyclerView.adapter)?.
+                notifyItemRangeChanged(0,app.watchs.findAll().size)
+            }
+        }
+    override fun onWatchClick(watch: WatchModel) {
+        val launcherIntent = Intent(this, WatchActivity::class.java)
+        getClickResult.launch(launcherIntent)
+    }
+
+    private val getClickResult =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) {
