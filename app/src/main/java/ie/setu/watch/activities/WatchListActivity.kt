@@ -61,6 +61,7 @@ class WatchListActivity : AppCompatActivity(), WatchListener {
         }
     override fun onWatchClick(watch: WatchModel) {
         val launcherIntent = Intent(this, WatchActivity::class.java)
+        launcherIntent.putExtra("watch_edit", watch)
         getClickResult.launch(launcherIntent)
     }
 

@@ -30,6 +30,12 @@ class WatchActivity : AppCompatActivity() {
 
         i("Watch Activity started...")
 
+        if (intent.hasExtra("watch_edit")) {
+            watch = intent.extras?.getParcelable("watch_edit")!!
+            binding.watchTitle.setText(watch.title)
+            binding.watchDescription.setText(watch.description)
+        }
+
         binding.btnAdd.setOnClickListener() {
             watch.title = binding.watchTitle.text.toString()
             watch.description = binding.watchDescription.text.toString()
