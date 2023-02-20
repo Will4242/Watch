@@ -21,11 +21,32 @@
             tools:text="A Title" />
 
         <TextView
-            android:id="@+id/description"
+            android:id="@+id/watchDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/watchTitle"
             tools:text="A Description" />
+
+        <TextView
+            android:id="@+id/watchPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/watchDescription"
+            tools:text="A Price" />
+
+        <TextView
+            android:id="@+id/watchGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/watchPrice"
+            tools:text="A Gender" />
+
+        <TextView
+            android:id="@+id/watchAvailable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/watchGender"
+            tools:text="A Available" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

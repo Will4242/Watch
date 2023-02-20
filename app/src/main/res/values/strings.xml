@@ -1,9 +1,14 @@
 <resources>
     <string name="app_name">Watch</string>
     <string name="button_addWatch">Add Watch</string>
+    <string name="button_updateWatch">Update Watch</string>
     <string name="hint_watchTitle">Watch Title</string>
     <string name="hint_watchDescription">Watch Description</string>
+    <string name="hint_watchPrice">Watch Price</string>
+    <string name="hint_watchGender">Watch Gender</string>
+    <string name="hint_watchAvailable">Watch Available</string>
     <string name="menu_addWatch">Add</string>
     <string name="menu_cancelWatch">Cancel</string>
+    <string name="infoAddWatch">All Fields Must Be Completed</string>
 
 </resources>

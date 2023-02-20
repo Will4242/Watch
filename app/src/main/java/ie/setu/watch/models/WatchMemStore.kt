@@ -27,6 +27,8 @@ class WatchMemStore : WatchStore {
         if (foundWatch != null) {
             foundWatch.title = watch.title
             foundWatch.description = watch.description
+            foundWatch.price = watch.price
+            foundWatch.gender = watch.gender
             logAll()
         }
     }
