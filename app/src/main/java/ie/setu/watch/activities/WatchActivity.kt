@@ -27,6 +27,7 @@ class WatchActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbarAdd)
 
         app = application as MainApp
+        var edit:Boolean = false
 
         i("Watch Activity started...")
 
@@ -34,18 +35,29 @@ class WatchActivity : AppCompatActivity() {
             watch = intent.extras?.getParcelable("watch_edit")!!
             binding.watchTitle.setText(watch.title)
             binding.watchDescription.setText(watch.description)
+            binding.watchPrice.setText(watch.price.toString())
+            binding.watchGender.setText(watch.gender)
+            binding.watchSold.setText(watch.sold.toString())
+            edit = true
+            binding.btnAdd.setText(R.string.button_updateWatch)
+
         }
 
         binding.btnAdd.setOnClickListener() {
             watch.title = binding.watchTitle.text.toString()
             watch.description = binding.watchDescription.text.toString()
-            if (watch.title.isNotEmpty()) {
-                app.watchs.create(watch.copy())
+            watch.price = binding.watchPrice.text.toString().toDouble()
+            watch.gender = binding.watchGender.text.toString()
+            watch.sold = binding.watchSold.text.toString().toBoolean()
+            if (watch.title.isNotEmpty() && watch.description.isNotEmpty() && watch.price > 0 && watch.gender.isNotEmpty()) {
+                if(!edit)
+                    app.watchs.create(watch.copy())
+                else app.watchs.update((watch.copy()))
                 setResult(RESULT_OK)
                 finish()
             }
             else {
-                Snackbar.make(it,"Please Enter a Title", Snackbar.LENGTH_LONG)
+                Snackbar.make(it,R.string.infoAddWatch, Snackbar.LENGTH_LONG)
                     .show()
             }
         }
