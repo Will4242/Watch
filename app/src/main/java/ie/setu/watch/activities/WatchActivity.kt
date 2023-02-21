@@ -37,7 +37,7 @@ class WatchActivity : AppCompatActivity() {
             binding.watchDescription.setText(watch.description)
             binding.watchPrice.setText(watch.price.toString())
             binding.watchGender.setText(watch.gender)
-            binding.watchAvailable.setText(watch.available.toString())
+            binding.watchSold.setText(watch.sold.toString())
             edit = true
             binding.btnAdd.setText(R.string.button_updateWatch)
 
@@ -48,7 +48,7 @@ class WatchActivity : AppCompatActivity() {
             watch.description = binding.watchDescription.text.toString()
             watch.price = binding.watchPrice.text.toString().toDouble()
             watch.gender = binding.watchGender.text.toString()
-            watch.available = binding.watchAvailable.text.toString().toBoolean()
+            watch.sold = binding.watchSold.text.toString().toBoolean()
             if (watch.title.isNotEmpty() && watch.description.isNotEmpty() && watch.price > 0 && watch.gender.isNotEmpty()) {
                 if(!edit)
                     app.watchs.create(watch.copy())

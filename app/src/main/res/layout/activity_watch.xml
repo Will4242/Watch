@@ -97,12 +97,12 @@
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/watchAvailable"
+                    android:id="@+id/watchSold"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_margin="8dp"
                     android:autofillHints="hint"
-                    android:hint="@string/hint_watchAvailable"
+                    android:hint="@string/hint_watchSold"
                     android:inputType="text"
                     android:maxLength="25"
                     android:maxLines="1"

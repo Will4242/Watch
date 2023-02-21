@@ -36,7 +36,7 @@ class WatchAdapter constructor(private var watchs: List<WatchModel>,
             binding.watchDescription.text = watch.description
             binding.watchPrice.text = watch.price.toString()
             binding.watchGender.text = watch.gender
-            binding.watchAvailable.text = watch.available.toString()
+            binding.watchSold.text = watch.sold.toString()
             binding.root.setOnClickListener { listener.onWatchClick(watch) }
         }
     }

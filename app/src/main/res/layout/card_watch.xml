@@ -42,7 +42,7 @@
             tools:text="A Gender" />
 
         <TextView
-            android:id="@+id/watchAvailable"
+            android:id="@+id/watchSold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/watchGender"
