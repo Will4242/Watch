@@ -82,7 +82,7 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp" />
 
-                <EditText
+                <Spinner
                     android:id="@+id/watchGender"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
@@ -96,14 +96,13 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp" />
 
-                <EditText
+                <CheckBox
                     android:id="@+id/watchSold"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_margin="8dp"
                     android:autofillHints="hint"
                     android:hint="@string/hint_watchSold"
-                    android:inputType="text"
                     android:maxLength="25"
                     android:maxLines="1"
                     android:padding="8dp"

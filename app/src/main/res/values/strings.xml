@@ -11,4 +11,10 @@
     <string name="menu_cancelWatch">Cancel</string>
     <string name="infoAddWatch">All Fields Must Be Completed</string>
 
+    <string-array name="gender">
+        <item name="hint_watchGenders">Please Select a Gender</item>
+        <item>Gent</item>
+        <item>Lady</item>
+        <item>Unisex</item>
+    </string-array>
 </resources>

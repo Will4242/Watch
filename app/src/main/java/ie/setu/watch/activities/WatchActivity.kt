@@ -4,6 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import androidx.core.view.get
+import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
 import ie.setu.watch.R
 import ie.setu.watch.databinding.ActivityWatchBinding
@@ -26,8 +32,35 @@ class WatchActivity : AppCompatActivity() {
         binding.toolbarAdd.title = title
         setSupportActionBar(binding.toolbarAdd)
 
+        //Hiding filed as new watch will have sold set as false
+        binding.watchSold.isVisible=false
+
         app = application as MainApp
         var edit:Boolean = false
+
+        //Reference for spinner
+        //https://www.geeksforgeeks.org/spinner-in-kotlin/
+        val genders = resources.getStringArray(R.array.gender)
+        // access the spinner
+        val spinner = findViewById<Spinner>(R.id.watchGender)
+        if (spinner != null) {
+            val adapter = ArrayAdapter(this,
+                android.R.layout.simple_spinner_item, genders)
+            spinner.adapter = adapter
+
+            //can be removed
+            spinner.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>,
+                                            view: View, position: Int, id: Long) {
+
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    // write code to perform some action
+                }
+            }
+        }
 
         i("Watch Activity started...")
 
@@ -36,10 +69,13 @@ class WatchActivity : AppCompatActivity() {
             binding.watchTitle.setText(watch.title)
             binding.watchDescription.setText(watch.description)
             binding.watchPrice.setText(watch.price.toString())
-            binding.watchGender.setText(watch.gender)
+            //binding.watchGender(watch.gender)
             binding.watchSold.setText(watch.sold.toString())
             edit = true
             binding.btnAdd.setText(R.string.button_updateWatch)
+
+            //So if watch is sold it can be seen in update watch
+            binding.watchSold.isVisible=true
 
         }
 
@@ -47,7 +83,7 @@ class WatchActivity : AppCompatActivity() {
             watch.title = binding.watchTitle.text.toString()
             watch.description = binding.watchDescription.text.toString()
             watch.price = binding.watchPrice.text.toString().toDouble()
-            watch.gender = binding.watchGender.text.toString()
+            watch.gender = binding.watchGender.selectedItem.toString()
             watch.sold = binding.watchSold.text.toString().toBoolean()
             if (watch.title.isNotEmpty() && watch.description.isNotEmpty() && watch.price > 0 && watch.gender.isNotEmpty()) {
                 if(!edit)
