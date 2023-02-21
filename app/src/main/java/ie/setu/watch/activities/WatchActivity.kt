@@ -36,6 +36,8 @@ class WatchActivity : AppCompatActivity() {
         binding.watchSold.isVisible=false
 
         app = application as MainApp
+
+        //flag for edit to update
         var edit:Boolean = false
 
         //Reference for spinner
