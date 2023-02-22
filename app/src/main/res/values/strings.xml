@@ -12,6 +12,7 @@
     <string name="infoAddWatch">All Fields Must Be Completed</string>
 
     <string-array name="gender">
+        <item>Please Select Gender</item>
         <item>Gent</item>
         <item>Lady</item>
         <item>Unisex</item>
