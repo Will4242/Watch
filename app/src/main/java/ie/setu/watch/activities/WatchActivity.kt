@@ -23,6 +23,7 @@ class WatchActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWatchBinding
     var watch = WatchModel()
     lateinit var app: MainApp
+    lateinit var adapter:ArrayAdapter<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +47,7 @@ class WatchActivity : AppCompatActivity() {
         // access the spinner
         val spinner = findViewById<Spinner>(R.id.watchGender)
         if (spinner != null) {
-            val adapter = ArrayAdapter(this,
+            adapter = ArrayAdapter(this,
                 android.R.layout.simple_spinner_item, genders)
             spinner.adapter = adapter
 
@@ -71,13 +72,15 @@ class WatchActivity : AppCompatActivity() {
             binding.watchTitle.setText(watch.title)
             binding.watchDescription.setText(watch.description)
             binding.watchPrice.setText(watch.price.toString())
-            //binding.watchGender(watch.gender)
-            binding.watchSold.setText(watch.sold.toString())
+            var spinPos = adapter.getPosition(watch.gender)
+            binding.watchGender.setSelection(spinPos)
+           // binding.watchSold.isSelected= watch.sold
             edit = true
             binding.btnAdd.setText(R.string.button_updateWatch)
 
             //So if watch is sold it can be seen in update watch
             binding.watchSold.isVisible=true
+            binding.watchSold.isChecked = watch.sold
 
         }
 
@@ -86,11 +89,14 @@ class WatchActivity : AppCompatActivity() {
             watch.description = binding.watchDescription.text.toString()
             watch.price = binding.watchPrice.text.toString().toDouble()
             watch.gender = binding.watchGender.selectedItem.toString()
-            watch.sold = binding.watchSold.text.toString().toBoolean()
-            if (watch.title.isNotEmpty() && watch.description.isNotEmpty() && watch.price > 0 && watch.gender.isNotEmpty()) {
+            //watch.sold = false
+            if (!watch.gender.equals("Please Select Gender") && watch.title.isNotEmpty() && watch.description.isNotEmpty() && watch.price > 0 && watch.gender.isNotEmpty()) {
                 if(!edit)
                     app.watchs.create(watch.copy())
-                else app.watchs.update((watch.copy()))
+                else {
+                    watch.sold= binding.watchSold.isChecked
+                    app.watchs.update((watch.copy()))
+                }
                 setResult(RESULT_OK)
                 finish()
             }
