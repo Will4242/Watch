@@ -50,8 +50,8 @@ class WatchAdapter constructor(private var watchs: List<WatchModel>,
                 binding.watchPrice.text = watch.price.toString()
                 binding.watchGender.text = watch.gender
                 binding.watchSold.isVisible = false
-                binding.root.setOnClickListener { listener.onWatchClick(watch)
-                }
+            }
+            binding.root.setOnClickListener { listener.onWatchClick(watch)
             }
         }
     }

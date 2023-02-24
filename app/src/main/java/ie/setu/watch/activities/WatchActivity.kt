@@ -35,6 +35,7 @@ class WatchActivity : AppCompatActivity() {
 
         //Hiding filed as new watch will have sold set as false
         binding.watchSold.isVisible=false
+        binding.btnDelete.isVisible=false
 
         app = application as MainApp
 
@@ -72,6 +73,7 @@ class WatchActivity : AppCompatActivity() {
             binding.watchTitle.setText(watch.title)
             binding.watchDescription.setText(watch.description)
             binding.watchPrice.setText(watch.price.toString())
+            //gets position of spinner in adapter for update
             var spinPos = adapter.getPosition(watch.gender)
             binding.watchGender.setSelection(spinPos)
            // binding.watchSold.isSelected= watch.sold
@@ -80,6 +82,7 @@ class WatchActivity : AppCompatActivity() {
 
             //So if watch is sold it can be seen in update watch
             binding.watchSold.isVisible=true
+            binding.btnDelete.isVisible=true
             binding.watchSold.isChecked = watch.sold
 
         }

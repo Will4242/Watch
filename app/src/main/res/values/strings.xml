@@ -2,13 +2,13 @@
     <string name="app_name">Watch</string>
     <string name="button_addWatch">Add Watch</string>
     <string name="button_updateWatch">Update Watch</string>
+    <string name="button_deleteWatch">Delete Watch</string>
     <string name="hint_watchTitle">Title</string>
     <string name="hint_watchDescription">Description</string>
     <string name="hint_watchPrice">Price</string>
     <string name="hint_watchGender">Gender</string>
     <string name="hint_watchSold">Sold</string>
     <string name="menu_addWatch">Add</string>
-    <string name="menu_deleteWatch">Delete</string>
     <string name="menu_cancelWatch">Cancel</string>
     <string name="infoAddWatch">All Fields Must Be Completed</string>
     <string name="ifWatchIsSold">Sold</string>
