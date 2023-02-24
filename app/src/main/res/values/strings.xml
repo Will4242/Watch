@@ -8,6 +8,7 @@
     <string name="hint_watchGender">Gender</string>
     <string name="hint_watchSold">Sold</string>
     <string name="menu_addWatch">Add</string>
+    <string name="menu_deleteWatch">Delete</string>
     <string name="menu_cancelWatch">Cancel</string>
     <string name="infoAddWatch">All Fields Must Be Completed</string>
     <string name="ifWatchIsSold">Sold</string>
