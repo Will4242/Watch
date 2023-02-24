@@ -51,7 +51,7 @@
                     android:maxLength="25"
                     android:maxLines="1"
                     android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <EditText
@@ -65,7 +65,7 @@
                     android:maxLength="25"
                     android:maxLines="1"
                     android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <EditText
@@ -79,7 +79,7 @@
                     android:maxLength="25"
                     android:maxLines="1"
                     android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <Spinner
@@ -93,21 +93,22 @@
                     android:maxLength="25"
                     android:maxLines="1"
                     android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <CheckBox
                     android:id="@+id/watchSold"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="start"
                     android:layout_margin="8dp"
+                    android:layout_weight="0"
                     android:autofillHints="hint"
                     android:hint="@string/hint_watchSold"
-                    android:maxLength="25"
-                    android:maxLines="1"
                     android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="14sp" />
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:centerIfNoTextEnabled="false" />
 
                 <Button
                     android:id="@+id/btnAdd"

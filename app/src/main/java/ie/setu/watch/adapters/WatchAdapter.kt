@@ -1,8 +1,11 @@
 package ie.setu.watch.adapters
 
+import android.provider.Settings.Global.getString
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import ie.setu.watch.R
 import ie.setu.watch.databinding.CardWatchBinding
 import ie.setu.watch.models.WatchModel
 
@@ -32,12 +35,24 @@ class WatchAdapter constructor(private var watchs: List<WatchModel>,
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(watch: WatchModel, listener: WatchListener) {
-            binding.watchTitle.text = watch.title
-            binding.watchDescription.text = watch.description
-            binding.watchPrice.text = watch.price.toString()
-            binding.watchGender.text = watch.gender
-            binding.watchSold.text = watch.sold.toString()
-            binding.root.setOnClickListener { listener.onWatchClick(watch) }
+            //If watch sold is true then only show title and that its sold and not allow to click in to update
+            if(watch.sold) {
+                binding.watchTitle.text = watch.title
+                binding.watchDescription.text = watch.description
+                binding.watchPrice.text = watch.price.toString()
+                binding.watchGender.text = watch.gender
+                binding.watchSold.isVisible = true
+            }
+            //If watch is not sold then hide the field and allow updates
+            else{
+                binding.watchTitle.text = watch.title
+                binding.watchDescription.text = watch.description
+                binding.watchPrice.text = watch.price.toString()
+                binding.watchGender.text = watch.gender
+                binding.watchSold.isVisible = false
+                binding.root.setOnClickListener { listener.onWatchClick(watch)
+                }
+            }
         }
     }
 }

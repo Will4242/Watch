@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="16dp">
 
         <TextView
@@ -43,9 +43,14 @@
 
         <TextView
             android:id="@+id/watchSold"
-            android:layout_width="wrap_content"
+            android:layout_width="333dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/watchGender"
+            android:layout_marginTop="-69dp"
+            android:gravity="right"
+            android:text="@string/ifWatchIsSold"
+            android:textColor="@color/red"
+            android:textSize="35sp"
             tools:text="Sold" />
 
     </RelativeLayout>

@@ -10,6 +10,9 @@
     <string name="menu_addWatch">Add</string>
     <string name="menu_cancelWatch">Cancel</string>
     <string name="infoAddWatch">All Fields Must Be Completed</string>
+    <string name="ifWatchIsSold">Sold</string>
+
+
 
     <string-array name="gender">
         <item>Please Select Gender</item>
