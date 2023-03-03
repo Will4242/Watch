@@ -87,6 +87,12 @@ class WatchActivity : AppCompatActivity() {
 
         }
 
+        binding.btnDelete.setOnClickListener(){
+            app.watchs.delete(watch)
+            setResult(99)
+            finish()
+        }
+
         binding.btnAdd.setOnClickListener() {
             watch.title = binding.watchTitle.text.toString()
             watch.description = binding.watchDescription.text.toString()

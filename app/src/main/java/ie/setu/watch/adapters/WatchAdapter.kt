@@ -1,16 +1,14 @@
 package ie.setu.watch.adapters
 
-import android.provider.Settings.Global.getString
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import ie.setu.watch.R
 import ie.setu.watch.databinding.CardWatchBinding
 import ie.setu.watch.models.WatchModel
 
 interface WatchListener {
-    fun onWatchClick(watch: WatchModel)
+    fun onWatchClick(watch: WatchModel, adapterPosition: Int)
 }
 
 class WatchAdapter constructor(private var watchs: List<WatchModel>,
@@ -47,11 +45,11 @@ class WatchAdapter constructor(private var watchs: List<WatchModel>,
             else{
                 binding.watchTitle.text = watch.title
                 binding.watchDescription.text = watch.description
-                binding.watchPrice.text = watch.price.toString()
+                binding.watchPrice.text = "€"+watch.price.toString()
                 binding.watchGender.text = watch.gender
                 binding.watchSold.isVisible = false
             }
-            binding.root.setOnClickListener { listener.onWatchClick(watch)
+            binding.root.setOnClickListener { listener.onWatchClick(watch, adapterPosition)
             }
         }
     }
