@@ -4,6 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import androidx.core.view.get
+import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
 import ie.setu.watch.R
 import ie.setu.watch.databinding.ActivityWatchBinding
@@ -17,6 +23,7 @@ class WatchActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWatchBinding
     var watch = WatchModel()
     lateinit var app: MainApp
+    lateinit var adapter:ArrayAdapter<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +33,38 @@ class WatchActivity : AppCompatActivity() {
         binding.toolbarAdd.title = title
         setSupportActionBar(binding.toolbarAdd)
 
+        //Hiding filed as new watch will have sold set as false
+        binding.watchSold.isVisible=false
+        binding.btnDelete.isVisible=false
+
         app = application as MainApp
+
+        //flag for edit to update
         var edit:Boolean = false
+
+        //Reference for spinner
+        //https://www.geeksforgeeks.org/spinner-in-kotlin/
+        val genders = resources.getStringArray(R.array.gender)
+        // access the spinner
+        val spinner = findViewById<Spinner>(R.id.watchGender)
+        if (spinner != null) {
+            adapter = ArrayAdapter(this,
+                android.R.layout.simple_spinner_item, genders)
+            spinner.adapter = adapter
+
+            //can be removed
+            spinner.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>,
+                                            view: View, position: Int, id: Long) {
+
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    // write code to perform some action
+                }
+            }
+        }
 
         i("Watch Activity started...")
 
@@ -36,23 +73,39 @@ class WatchActivity : AppCompatActivity() {
             binding.watchTitle.setText(watch.title)
             binding.watchDescription.setText(watch.description)
             binding.watchPrice.setText(watch.price.toString())
-            binding.watchGender.setText(watch.gender)
-            binding.watchSold.setText(watch.sold.toString())
+            //gets position of spinner in adapter for update
+            var spinPos = adapter.getPosition(watch.gender)
+            binding.watchGender.setSelection(spinPos)
+           // binding.watchSold.isSelected= watch.sold
             edit = true
             binding.btnAdd.setText(R.string.button_updateWatch)
 
+            //So if watch is sold it can be seen in update watch
+            binding.watchSold.isVisible=true
+            binding.btnDelete.isVisible=true
+            binding.watchSold.isChecked = watch.sold
+
+        }
+
+        binding.btnDelete.setOnClickListener(){
+            app.watchs.delete(watch)
+            setResult(99)
+            finish()
         }
 
         binding.btnAdd.setOnClickListener() {
             watch.title = binding.watchTitle.text.toString()
             watch.description = binding.watchDescription.text.toString()
             watch.price = binding.watchPrice.text.toString().toDouble()
-            watch.gender = binding.watchGender.text.toString()
-            watch.sold = binding.watchSold.text.toString().toBoolean()
-            if (watch.title.isNotEmpty() && watch.description.isNotEmpty() && watch.price > 0 && watch.gender.isNotEmpty()) {
+            watch.gender = binding.watchGender.selectedItem.toString()
+            //watch.sold = false
+            if (!watch.gender.equals("Please Select Gender") && watch.title.isNotEmpty() && watch.description.isNotEmpty() && watch.price > 0 && watch.gender.isNotEmpty()) {
                 if(!edit)
                     app.watchs.create(watch.copy())
-                else app.watchs.update((watch.copy()))
+                else {
+                    watch.sold= binding.watchSold.isChecked
+                    app.watchs.update((watch.copy()))
+                }
                 setResult(RESULT_OK)
                 finish()
             }

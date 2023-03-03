@@ -34,6 +34,13 @@ class WatchMemStore : WatchStore {
         }
     }
 
+    override fun delete(watch: WatchModel) {
+        var foundWatch: WatchModel? = watchs.find { p -> p.id == watch.id }
+        if (foundWatch != null) {
+            watchs.remove(foundWatch)
+        }
+    }
+
     private fun logAll() {
         watchs.forEach { i("$it") }
     }

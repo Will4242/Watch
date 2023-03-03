@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context="ie.setu.watch.activities.WatchActivity">
 
     <RelativeLayout
@@ -17,7 +18,7 @@
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
+            android:background="@color/rolexGreen"
             android:fitsSystemWindows="true"
             app:elevation="0dip"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -26,7 +27,7 @@
                 android:id="@+id/toolbarAdd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:titleTextColor="@color/colorPrimary" />
+                app:titleTextColor="@color/rolexGold" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <ScrollView
@@ -51,7 +52,7 @@
                     android:maxLength="25"
                     android:maxLines="1"
                     android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <EditText
@@ -65,7 +66,7 @@
                     android:maxLength="25"
                     android:maxLines="1"
                     android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <EditText
@@ -79,10 +80,10 @@
                     android:maxLength="25"
                     android:maxLines="1"
                     android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
-                <EditText
+                <Spinner
                     android:id="@+id/watchGender"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
@@ -93,37 +94,50 @@
                     android:maxLength="25"
                     android:maxLines="1"
                     android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
-                <EditText
+                <CheckBox
                     android:id="@+id/watchSold"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="start"
                     android:layout_margin="8dp"
+                    android:layout_weight="0"
                     android:autofillHints="hint"
                     android:hint="@string/hint_watchSold"
-                    android:inputType="text"
-                    android:maxLength="25"
-                    android:maxLines="1"
                     android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="14sp" />
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:centerIfNoTextEnabled="false" />
 
                 <Button
                     android:id="@+id/btnAdd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:background="@color/colorAccent"
+                    android:backgroundTint="@color/blue"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:stateListAnimator="@null"
                     android:text="@string/button_addWatch"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/btnDelete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:backgroundTint="@color/red"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:stateListAnimator="@null"
+                    android:text="@string/button_deleteWatch"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
             </LinearLayout>
         </ScrollView>
-
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
