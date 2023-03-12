@@ -1,5 +1,7 @@
 package ie.setu.watch.activities
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -8,11 +10,15 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.get
 import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 import ie.setu.watch.R
 import ie.setu.watch.databinding.ActivityWatchBinding
+import ie.setu.watch.helpers.showImagePicker
 import ie.setu.watch.main.MainApp
 import ie.setu.watch.models.WatchModel
 import timber.log.Timber
@@ -24,6 +30,8 @@ class WatchActivity : AppCompatActivity() {
     var watch = WatchModel()
     lateinit var app: MainApp
     lateinit var adapter:ArrayAdapter<String>
+    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,6 +93,15 @@ class WatchActivity : AppCompatActivity() {
             binding.btnDelete.isVisible=true
             binding.watchSold.isChecked = watch.sold
 
+            Picasso.get()
+                .load(watch.image)
+                .into(binding.watchImage)
+            if (watch.image != Uri.EMPTY) {
+                binding.chooseImage.setText(R.string.change_watch_image)
+            }
+            Picasso.get()
+                .load(watch.image)
+                .into(binding.watchImage)
         }
 
         binding.btnDelete.setOnClickListener(){
@@ -114,6 +131,11 @@ class WatchActivity : AppCompatActivity() {
                     .show()
             }
         }
+
+        binding.chooseImage.setOnClickListener {
+            showImagePicker(imageIntentLauncher)
+        }
+        registerImagePickerCallback()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -129,6 +151,28 @@ class WatchActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    private fun registerImagePickerCallback() {
+        imageIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when(result.resultCode){
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Result ${result.data!!.data}")
+                            watch.image = result.data!!.data!!
+                            Picasso.get()
+                                .load(watch.image)
+                                .into(binding.watchImage)
+                            binding.chooseImage.setText(R.string.change_watch_image)
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
+    }
+
+
 }
 
 

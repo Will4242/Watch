@@ -30,6 +30,7 @@ class WatchMemStore : WatchStore {
             foundWatch.price = watch.price
             foundWatch.gender = watch.gender
             foundWatch.sold = watch.sold
+            foundWatch.image = watch.image
             logAll()
         }
     }

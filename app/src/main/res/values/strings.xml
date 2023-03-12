@@ -12,6 +12,11 @@
     <string name="menu_cancelWatch">Cancel</string>
     <string name="infoAddWatch">All Fields Must Be Completed</string>
     <string name="ifWatchIsSold">Sold</string>
+    <string name="button_addImage"> Add Image </string>
+    <string name="select_watch_image">Select watch image</string>
+    <string name="change_watch_image">Change watch image</string>
+
+
 
 
 
