@@ -16,12 +16,13 @@
     <string name="select_watch_image">Select watch image</string>
     <string name="change_watch_image">Change watch image</string>
     <string name="button_location">Set Location</string>
-
+    <string name="title_activity_map">MapActivity</string>
     <string-array name="gender">
         <item>Please Select Gender</item>
         <item>Gent</item>
         <item>Lady</item>
         <item>Unisex</item>
     </string-array>
+
 
 </resources>
