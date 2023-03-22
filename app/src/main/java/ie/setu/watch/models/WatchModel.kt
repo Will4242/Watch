@@ -11,8 +11,10 @@ data class WatchModel(var id: Long = 0,
                       var price: Double = 0.00,
                       var gender: String = "",
                       var sold: Boolean = false,
-                      var image: Uri = Uri.EMPTY
-                      ) : Parcelable
+                      var image: Uri = Uri.EMPTY,
+                      var lat : Double = 0.0,
+                      var lng: Double = 0.0,
+                      var zoom: Float = 0f) : Parcelable
 
 @Parcelize
 data class Location(var lat: Double = 0.0,

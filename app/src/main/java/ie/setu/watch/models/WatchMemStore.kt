@@ -31,6 +31,9 @@ class WatchMemStore : WatchStore {
             foundWatch.gender = watch.gender
             foundWatch.sold = watch.sold
             foundWatch.image = watch.image
+            foundWatch.lat = watch.lat
+            foundWatch.lng = watch.lng
+            foundWatch.zoom = watch.zoom
             logAll()
         }
     }

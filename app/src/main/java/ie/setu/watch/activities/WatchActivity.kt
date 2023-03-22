@@ -33,7 +33,7 @@ class WatchActivity : AppCompatActivity() {
     lateinit var adapter:ArrayAdapter<String>
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
-    var location = Location(52.245696, -7.139102, 15f)
+    //var location = Location(52.245696, -7.139102, 15f)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -142,6 +142,12 @@ class WatchActivity : AppCompatActivity() {
         }
 
         binding.watchLocation.setOnClickListener {
+            val location = Location(52.245696, -7.139102, 15f)
+            if (watch.zoom != 0f) {
+                location.lat =  watch.lat
+                location.lng = watch.lng
+                location.zoom = watch.zoom
+            }
             val launcherIntent = Intent(this, MapActivity::class.java)
                 .putExtra("location", location)
             mapIntentLauncher.launch(launcherIntent)
@@ -193,14 +199,18 @@ class WatchActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Location ${result.data.toString()}")
-                            location = result.data!!.extras?.getParcelable("location")!!
+                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
                             i("Location == $location")
+                            watch.lat = location.lat
+                            watch.lng = location.lng
+                            watch.zoom = location.zoom
                         } // end of if
                     }
                     RESULT_CANCELED -> { } else -> { }
                 }
             }
     }
+
 
 
 }
