@@ -20,6 +20,7 @@ import ie.setu.watch.R
 import ie.setu.watch.databinding.ActivityWatchBinding
 import ie.setu.watch.helpers.showImagePicker
 import ie.setu.watch.main.MainApp
+import ie.setu.watch.models.Location
 import ie.setu.watch.models.WatchModel
 import timber.log.Timber
 import timber.log.Timber.i
@@ -31,6 +32,8 @@ class WatchActivity : AppCompatActivity() {
     lateinit var app: MainApp
     lateinit var adapter:ArrayAdapter<String>
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
+    //var location = Location(52.245696, -7.139102, 15f)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,9 +96,6 @@ class WatchActivity : AppCompatActivity() {
             binding.btnDelete.isVisible=true
             binding.watchSold.isChecked = watch.sold
 
-            Picasso.get()
-                .load(watch.image)
-                .into(binding.watchImage)
             if (watch.image != Uri.EMPTY) {
                 binding.chooseImage.setText(R.string.change_watch_image)
             }
@@ -103,6 +103,11 @@ class WatchActivity : AppCompatActivity() {
                 .load(watch.image)
                 .into(binding.watchImage)
         }
+
+        binding.watchLocation.setOnClickListener {
+            i ("Set Location Pressed")
+        }
+
 
         binding.btnDelete.setOnClickListener(){
             app.watchs.delete(watch)
@@ -135,7 +140,21 @@ class WatchActivity : AppCompatActivity() {
         binding.chooseImage.setOnClickListener {
             showImagePicker(imageIntentLauncher)
         }
+
+        binding.watchLocation.setOnClickListener {
+            val location = Location(52.245696, -7.139102, 15f)
+            if (watch.zoom != 0f) {
+                location.lat =  watch.lat
+                location.lng = watch.lng
+                location.zoom = watch.zoom
+            }
+            val launcherIntent = Intent(this, MapActivity::class.java)
+                .putExtra("location", location)
+            mapIntentLauncher.launch(launcherIntent)
+        }
+
         registerImagePickerCallback()
+        registerMapCallback()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -171,6 +190,27 @@ class WatchActivity : AppCompatActivity() {
                 }
             }
     }
+
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when (result.resultCode) {
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Location ${result.data.toString()}")
+                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
+                            i("Location == $location")
+                            watch.lat = location.lat
+                            watch.lng = location.lng
+                            watch.zoom = location.zoom
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
+    }
+
 
 
 }
