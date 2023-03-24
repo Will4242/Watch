@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toUri
 import androidx.core.view.get
 import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
@@ -95,8 +96,8 @@ class WatchActivity : AppCompatActivity() {
             binding.watchSold.isVisible=true
             binding.btnDelete.isVisible=true
             binding.watchSold.isChecked = watch.sold
-
-            if (watch.image != Uri.EMPTY) {
+//change back WILL
+            if (watch.image != Uri.EMPTY.toString()) {
                 binding.chooseImage.setText(R.string.change_watch_image)
             }
             Picasso.get()
@@ -179,9 +180,10 @@ class WatchActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Result ${result.data!!.data}")
-                            watch.image = result.data!!.data!!
+                            //change back WILL
+                            watch.image = result.data!!.data!!.toString()
                             Picasso.get()
-                                .load(watch.image)
+                                .load(watch.image.toUri())
                                 .into(binding.watchImage)
                             binding.chooseImage.setText(R.string.change_watch_image)
                         } // end of if

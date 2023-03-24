@@ -1,5 +1,9 @@
 package ie.setu.watch.models
 
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import timber.log.Timber.i
 
 var lastId = 0L
@@ -20,6 +24,24 @@ class WatchMemStore : WatchStore {
         watch.id = getId()
         watchs.add(watch)
         logAll()
+
+        //val db = Firebase.database
+       // val db: FirebaseDatabase = FirebaseDatabase.getInstance()
+        //val myRef: DatabaseReference = db.getReference("watchs")
+        //myRef.setValue(watch)
+        //myRef.setValue("Hello, World!")
+
+       /* db.collection("watchs")
+            .add(data)
+            .addOnSuccessListener { documentReference ->
+                Log.d(TAG, "DocumentSnapshot written with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error adding document", e)
+            }*/
+
+        val database = Firebase.database.reference
+        database.child("watchs").child(watch.id.toString()).setValue(watch)
     }
 
     override fun update(watch: WatchModel) {
