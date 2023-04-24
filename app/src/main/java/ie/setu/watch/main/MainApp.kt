@@ -9,11 +9,12 @@ import timber.log.Timber.i
 
 class MainApp : Application() {
 
-    val watchs = WatchMemStore()
+    lateinit var watchs: WatchMemStore
 
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
+        watchs = WatchMemStore()
         i("Watch started")
 
         // Write a message to the database
