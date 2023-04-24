@@ -96,8 +96,8 @@ class WatchActivity : AppCompatActivity() {
             binding.watchSold.isVisible=true
             binding.btnDelete.isVisible=true
             binding.watchSold.isChecked = watch.sold
-//change back WILL
-            if (watch.image != Uri.EMPTY.toString()) {
+//change back
+            if (watch.image != Uri.EMPTY) {
                 binding.chooseImage.setText(R.string.change_watch_image)
             }
             Picasso.get()
@@ -139,7 +139,7 @@ class WatchActivity : AppCompatActivity() {
         }
 
         binding.chooseImage.setOnClickListener {
-            showImagePicker(imageIntentLauncher)
+            showImagePicker(imageIntentLauncher,this)
         }
 
         binding.watchLocation.setOnClickListener {
@@ -180,10 +180,14 @@ class WatchActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Result ${result.data!!.data}")
-                            //change back WILL
-                            watch.image = result.data!!.data!!.toString()
+
+                            val image = result.data!!.data!!
+                            contentResolver.takePersistableUriPermission(image,
+                                Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                            watch.image = image
+
                             Picasso.get()
-                                .load(watch.image.toUri())
+                                .load(watch.image)
                                 .into(binding.watchImage)
                             binding.chooseImage.setText(R.string.change_watch_image)
                         } // end of if
