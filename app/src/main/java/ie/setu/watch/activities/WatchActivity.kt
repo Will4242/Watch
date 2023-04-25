@@ -35,7 +35,8 @@ class WatchActivity : AppCompatActivity() {
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
     //var location = Location(52.245696, -7.139102, 15f)
-
+    //flag for edit to update
+    var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,8 +52,8 @@ class WatchActivity : AppCompatActivity() {
 
         app = application as MainApp
 
-        //flag for edit to update
-        var edit:Boolean = false
+
+
 
         //Reference for spinner
         //https://www.geeksforgeeks.org/spinner-in-kotlin/
@@ -160,17 +161,24 @@ class WatchActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_watch, menu)
+        if (edit) menu.getItem(0).isVisible = true
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.item_cancel -> {
+            R.id.item_delete -> {
+                setResult(99)
+                app.watchs.delete(watch)
                 finish()
+            }
+            R.id.item_cancel -> { finish()
             }
         }
         return super.onOptionsItemSelected(item)
     }
+
+
 
     private fun registerImagePickerCallback() {
         imageIntentLauncher =

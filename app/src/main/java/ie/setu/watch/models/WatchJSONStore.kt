@@ -59,7 +59,11 @@ class WatchJSONStore(private val context: Context) : WatchStore {
     }
 
     override fun delete(watch: WatchModel) {
-        TODO("Not yet implemented")
+        var foundWatch: WatchModel? = watchs.find { p -> p.id == watch.id }
+        if (foundWatch != null) {
+            watchs.remove(foundWatch)
+        }
+        serialize()
     }
 
     private fun serialize() {

@@ -10,7 +10,7 @@ import ie.setu.watch.databinding.CardWatchBinding
 import ie.setu.watch.models.WatchModel
 
 interface WatchListener {
-    fun onWatchClick(watch: WatchModel, adapterPosition: Int)
+    fun onWatchClick(watch: WatchModel, position : Int)
 }
 
 class WatchAdapter constructor(private var watchs: List<WatchModel>,
