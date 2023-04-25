@@ -38,8 +38,8 @@ class WatchAdapter constructor(private var watchs: List<WatchModel>,
             //If watch sold is true then only show title and that its sold and not allow to click in to update
             if(watch.sold) {
                 binding.watchTitle.text = watch.title
-                //change back WILL
-                Picasso.get().load(watch.image.toUri()).resize(200,200).into(binding.imageIcon)
+                //change back
+                Picasso.get().load(watch.image).resize(200,200).into(binding.imageIcon)
                 binding.watchDescription.text = watch.description
                 binding.watchPrice.text = watch.price.toString()
                 binding.watchGender.text = watch.gender
@@ -49,7 +49,7 @@ class WatchAdapter constructor(private var watchs: List<WatchModel>,
             else{
                 binding.watchTitle.text = watch.title
                 //change back WILL
-                Picasso.get().load(watch.image.toUri()).resize(200,200).into(binding.imageIcon)
+                Picasso.get().load(watch.image).resize(200,200).into(binding.imageIcon)
                 binding.watchDescription.text = watch.description
                 binding.watchPrice.text = "€"+watch.price.toString()
                 binding.watchGender.text = watch.gender

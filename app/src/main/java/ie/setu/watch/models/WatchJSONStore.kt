@@ -42,7 +42,20 @@ class WatchJSONStore(private val context: Context) : WatchStore {
 
 
     override fun update(watch: WatchModel) {
-        // todo
+        val watchsList = findAll() as ArrayList<WatchModel>
+        var foundWatch: WatchModel? = watchsList.find { p -> p.id == watch.id }
+        if (foundWatch != null) {
+            foundWatch.title = watch.title
+            foundWatch.description = watch.description
+            foundWatch.price = watch.price
+            foundWatch.gender = watch.gender
+            foundWatch.sold = watch.sold
+            foundWatch.image = watch.image
+            foundWatch.lat = watch.lat
+            foundWatch.lng = watch.lng
+            foundWatch.zoom = watch.zoom
+        }
+        serialize()
     }
 
     override fun delete(watch: WatchModel) {
