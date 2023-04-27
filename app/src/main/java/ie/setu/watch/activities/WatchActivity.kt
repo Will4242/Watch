@@ -54,7 +54,6 @@ class WatchActivity : AppCompatActivity() {
 
 
 
-
         //Reference for spinner
         //https://www.geeksforgeeks.org/spinner-in-kotlin/
         val genders = resources.getStringArray(R.array.gender)
