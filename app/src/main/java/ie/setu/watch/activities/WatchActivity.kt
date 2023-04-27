@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toUri
 import androidx.core.view.get
 import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
@@ -34,7 +35,8 @@ class WatchActivity : AppCompatActivity() {
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
     //var location = Location(52.245696, -7.139102, 15f)
-
+    //flag for edit to update
+    var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,8 +52,7 @@ class WatchActivity : AppCompatActivity() {
 
         app = application as MainApp
 
-        //flag for edit to update
-        var edit:Boolean = false
+
 
         //Reference for spinner
         //https://www.geeksforgeeks.org/spinner-in-kotlin/
@@ -95,7 +96,7 @@ class WatchActivity : AppCompatActivity() {
             binding.watchSold.isVisible=true
             binding.btnDelete.isVisible=true
             binding.watchSold.isChecked = watch.sold
-
+//change back
             if (watch.image != Uri.EMPTY) {
                 binding.chooseImage.setText(R.string.change_watch_image)
             }
@@ -138,7 +139,7 @@ class WatchActivity : AppCompatActivity() {
         }
 
         binding.chooseImage.setOnClickListener {
-            showImagePicker(imageIntentLauncher)
+            showImagePicker(imageIntentLauncher,this)
         }
 
         binding.watchLocation.setOnClickListener {
@@ -159,17 +160,24 @@ class WatchActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_watch, menu)
+        if (edit) menu.getItem(0).isVisible = true
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.item_cancel -> {
+            R.id.item_delete -> {
+                setResult(99)
+                app.watchs.delete(watch)
                 finish()
+            }
+            R.id.item_cancel -> { finish()
             }
         }
         return super.onOptionsItemSelected(item)
     }
+
+
 
     private fun registerImagePickerCallback() {
         imageIntentLauncher =
@@ -179,7 +187,12 @@ class WatchActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Result ${result.data!!.data}")
-                            watch.image = result.data!!.data!!
+
+                            val image = result.data!!.data!!
+                            contentResolver.takePersistableUriPermission(image,
+                                Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                            watch.image = image
+
                             Picasso.get()
                                 .load(watch.image)
                                 .into(binding.watchImage)

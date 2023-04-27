@@ -2,6 +2,7 @@ package ie.setu.watch.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
@@ -9,7 +10,7 @@ import ie.setu.watch.databinding.CardWatchBinding
 import ie.setu.watch.models.WatchModel
 
 interface WatchListener {
-    fun onWatchClick(watch: WatchModel, adapterPosition: Int)
+    fun onWatchClick(watch: WatchModel, position : Int)
 }
 
 class WatchAdapter constructor(private var watchs: List<WatchModel>,
@@ -37,6 +38,7 @@ class WatchAdapter constructor(private var watchs: List<WatchModel>,
             //If watch sold is true then only show title and that its sold and not allow to click in to update
             if(watch.sold) {
                 binding.watchTitle.text = watch.title
+                //change back
                 Picasso.get().load(watch.image).resize(200,200).into(binding.imageIcon)
                 binding.watchDescription.text = watch.description
                 binding.watchPrice.text = watch.price.toString()
@@ -46,6 +48,7 @@ class WatchAdapter constructor(private var watchs: List<WatchModel>,
             //If watch is not sold then hide the field and allow updates
             else{
                 binding.watchTitle.text = watch.title
+                //change back WILL
                 Picasso.get().load(watch.image).resize(200,200).into(binding.imageIcon)
                 binding.watchDescription.text = watch.description
                 binding.watchPrice.text = "€"+watch.price.toString()

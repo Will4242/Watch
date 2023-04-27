@@ -20,7 +20,8 @@ class WatchListActivity : AppCompatActivity(), WatchListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityWatchListBinding
-    var listPosition = 0
+    //var listPosition = 0
+    private var listPosition: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,15 +60,18 @@ class WatchListActivity : AppCompatActivity(), WatchListener {
                 (binding.recyclerView.adapter)?.
                 notifyItemRangeChanged(0,app.watchs.findAll().size)
             }
+            else // Deleting
+                if (it.resultCode == 99)     (binding.recyclerView.adapter)?.notifyItemRemoved(listPosition)
         }
 
-    override fun onWatchClick(watch: WatchModel, pos: Int) {
-        //get position for deleting
-        listPosition=pos
+
+    override fun onWatchClick(watch: WatchModel, pos : Int) {
         val launcherIntent = Intent(this, WatchActivity::class.java)
         launcherIntent.putExtra("watch_edit", watch)
+        listPosition = pos
         getClickResult.launch(launcherIntent)
     }
+
 
     private val getClickResult =
         registerForActivityResult(
