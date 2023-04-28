@@ -48,9 +48,14 @@ class WatchListActivity : AppCompatActivity(), WatchListener {
                 val launcherIntent = Intent(this, WatchActivity::class.java)
                 getResult.launch(launcherIntent)
             }
+            R.id.item_map -> {
+                val launcherIntent = Intent(this, WatchMapsActivity::class.java)
+                mapIntentLauncher.launch(launcherIntent)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
+
 
     private val getResult =
         registerForActivityResult(
@@ -71,6 +76,12 @@ class WatchListActivity : AppCompatActivity(), WatchListener {
         listPosition = pos
         getClickResult.launch(launcherIntent)
     }
+
+    private val mapIntentLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        )    { }
+
 
 
     private val getClickResult =

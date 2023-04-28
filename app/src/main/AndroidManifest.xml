@@ -16,6 +16,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Watch"
         tools:targetApi="31">
+        <activity
+            android:name=".activities.WatchMapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_watch_maps"
+            android:theme="@style/Theme.Watch.NoActionBar">
+        <meta-data
+            android:name="android.app.lib_name"
+            android:value="" />
+        </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
@@ -43,4 +53,5 @@
                 android:value="" />
         </activity>
     </application>
+
 </manifest>
