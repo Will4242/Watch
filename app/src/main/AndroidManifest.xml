@@ -17,13 +17,16 @@
         android:theme="@style/Theme.Watch"
         tools:targetApi="31">
         <activity
+            android:name=".activities.WatchListActivity"
+            android:exported="true" />
+        <activity
             android:name=".activities.WatchMapsActivity"
             android:exported="false"
             android:label="@string/title_activity_watch_maps"
             android:theme="@style/Theme.Watch.NoActionBar">
-        <meta-data
-            android:name="android.app.lib_name"
-            android:value="" />
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
         </activity>
 
         <meta-data
@@ -35,7 +38,7 @@
             android:exported="false"
             android:label="@string/title_activity_map" />
         <activity
-            android:name=".activities.WatchListActivity"
+            android:name=".activities.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
