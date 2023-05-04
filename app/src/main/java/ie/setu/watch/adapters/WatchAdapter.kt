@@ -41,7 +41,7 @@ class WatchAdapter constructor(private var watchs: List<WatchModel>,
                 //change back
                 Picasso.get().load(watch.image).resize(200,200).into(binding.imageIcon)
                 binding.watchDescription.text = watch.description
-                binding.watchPrice.text = watch.price.toString()
+                binding.watchPrice.text = "\u20AC"+watch.price.toString()
                 binding.watchGender.text = watch.gender
                 binding.watchSold.isVisible = true
             }
@@ -51,7 +51,7 @@ class WatchAdapter constructor(private var watchs: List<WatchModel>,
                 //change back WILL
                 Picasso.get().load(watch.image).resize(200,200).into(binding.imageIcon)
                 binding.watchDescription.text = watch.description
-                binding.watchPrice.text = "€"+watch.price.toString()
+                binding.watchPrice.text = "\u20AC"+watch.price.toString()
                 binding.watchGender.text = watch.gender
                 binding.watchSold.isVisible = false
             }

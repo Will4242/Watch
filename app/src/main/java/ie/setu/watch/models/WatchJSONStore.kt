@@ -34,12 +34,16 @@ class WatchJSONStore(private val context: Context) : WatchStore {
         return watchs
     }
 
+    override fun findById(id:Long) : WatchModel? {
+        val foundWatch: WatchModel? = watchs.find { it.id == id }
+        return foundWatch
+    }
+
     override fun create(watch: WatchModel) {
         watch.id = generateRandomId()
         watchs.add(watch)
         serialize()
     }
-
 
     override fun update(watch: WatchModel) {
         val watchsList = findAll() as ArrayList<WatchModel>
