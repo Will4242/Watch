@@ -7,11 +7,12 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.squareup.picasso.Picasso
 import ie.setu.watch.databinding.ActivityWatchMapsBinding
 import ie.setu.watch.databinding.ContentWatchMapsBinding
 import ie.setu.watch.main.MainApp
 
-class WatchMapsActivity : AppCompatActivity() {
+class WatchMapsActivity : AppCompatActivity(),GoogleMap.OnMarkerClickListener {
 
     private lateinit var binding: ActivityWatchMapsBinding
     private lateinit var contentBinding: ContentWatchMapsBinding
@@ -41,7 +42,18 @@ class WatchMapsActivity : AppCompatActivity() {
             val options = MarkerOptions().title(it.title).position(loc)
             map.addMarker(options)?.tag = it.id
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.zoom))
+            map.setOnMarkerClickListener(this)
         }
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        //val watch = marker.tag as WatchModel
+        val tag = marker.tag as Long
+        val watch = app.watchs.findById(tag)
+        contentBinding.currentTitle.text = watch!!.title
+        contentBinding.currentPrice.text = "\u20AC" + watch.price.toString()
+        Picasso.get().load(watch.image).into(contentBinding.currentImage)
+        return false
     }
 
     override fun onDestroy() {

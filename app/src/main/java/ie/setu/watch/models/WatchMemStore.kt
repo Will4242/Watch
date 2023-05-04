@@ -26,6 +26,11 @@ class WatchMemStore : WatchStore {
         return watchs
     }
 
+    override fun findById(id:Long) : WatchModel? {
+        val foundWatch: WatchModel? = watchs.find { it.id == id }
+        return foundWatch
+    }
+
     override fun create(watch: WatchModel) {
         watch.id = getId()
         watchs.add(watch)
