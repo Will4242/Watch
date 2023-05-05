@@ -3,12 +3,17 @@ package ie.setu.watch.activities
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Switch
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.setu.watch.R
+import ie.setu.watch.R.id.app_bar_switch
 import ie.setu.watch.adapters.WatchAdapter
 import ie.setu.watch.adapters.WatchListener
 import ie.setu.watch.databinding.ActivityWatchListBinding
@@ -35,10 +40,27 @@ class WatchListActivity : AppCompatActivity(), WatchListener {
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = WatchAdapter(app.watchs.findAll(),this)
+
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+
+        var itemSwitch = menu.findItem(R.id.app_bar_switch)
+        itemSwitch.setActionView(R.layout.switch_item)
+        var sw = itemSwitch.actionView?.findViewById<Switch>(R.id.thene)
+        if (sw != null) {
+            sw.setOnCheckedChangeListener{ buttonView, isChecked ->
+                if(isChecked) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
+            }
+        }
+
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -51,6 +73,18 @@ class WatchListActivity : AppCompatActivity(), WatchListener {
             R.id.item_map -> {
                 val launcherIntent = Intent(this, WatchMapsActivity::class.java)
                 mapIntentLauncher.launch(launcherIntent)
+            }
+            app_bar_switch -> {
+                Log.i("HELP", "IN App bar")
+                val switch: Switch = findViewById(app_bar_switch)
+
+                switch.setOnCheckedChangeListener{ buttonView, isChecked ->
+                    if(isChecked) {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    } else {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    }
+                }
             }
         }
         return super.onOptionsItemSelected(item)

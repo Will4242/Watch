@@ -3,7 +3,8 @@
     <color name="rolexGold">#A37E2C</color>
     <color name="rolexGreen">#265C26</color>
     <color name="red">#BD1010</color>
-    <color name="background">#DBFADB</color>
+    <color name="background">#BCECBC</color>
+    <color name="backgroundNight">#121212</color>
     <color name="blue">#1C46B5</color>
     <color name="black">#FF000000</color>
     <color name="colorPrimaryDark">#000000</color>
