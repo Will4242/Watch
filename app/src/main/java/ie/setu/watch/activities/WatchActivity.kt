@@ -10,8 +10,12 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Switch
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.core.net.toUri
 import androidx.core.view.get
 import androidx.core.view.isVisible
@@ -51,7 +55,6 @@ class WatchActivity : AppCompatActivity() {
         binding.btnDelete.isVisible=false
 
         app = application as MainApp
-
 
 
         //Reference for spinner
@@ -173,6 +176,7 @@ class WatchActivity : AppCompatActivity() {
             }
             R.id.item_cancel -> { finish()
             }
+
         }
         return super.onOptionsItemSelected(item)
     }

@@ -1,6 +1,7 @@
 package ie.setu.watch.main
 
 import android.app.Application
+import android.widget.Switch
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import ie.setu.watch.models.WatchJSONStore
@@ -19,6 +20,8 @@ class MainApp : Application() {
        // watchs = WatchMemStore()
         watchs = WatchJSONStore(applicationContext)
         i("Watch started")
+
+
 
         // Write a message to the database
         // Write a message to the database
